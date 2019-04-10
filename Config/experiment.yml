@@ -1,0 +1,15 @@
+User:
+  name: Aquiles
+
+Params:
+  resistance: 100ohm
+  port: /dev/ttyACM0  # COM3  COM5....
+
+Scan:
+  start: 0V
+  stop: 3300mV
+  step: 100mV
+  delay: 50ms
+  channel_in: 0
+  channel_out: 0
+

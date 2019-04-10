@@ -1,0 +1,12 @@
+Params:
+  port: /dev/ttyACM0
+  resistance: 100ohm
+Scan:
+  channel_in: 0
+  channel_out: 0
+  delay: 100ms
+  start: 0V
+  step: 500mV
+  stop: 3300mV
+User:
+  name: Aquiles
