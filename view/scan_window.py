@@ -1,9 +1,9 @@
 from PyQt5.QtCore import QTimer
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QMessageBox
 from PyQt5 import uic
 import os
 import threading
-
+from datetime import datetime
 import pyqtgraph as pg
 
 
@@ -37,8 +37,15 @@ class ScanWindow(QMainWindow):
         layout = self.centralwidget.layout()
         layout.addWidget(self.plot_widget)
 
-        self.action_Save.triggered.connect(self.experiment.save_data)
+        self.action_Save.triggered.connect(self.save_clicked)
 
+    def save_clicked(self):
+        if not hasattr(self.experiment, 'currents'):
+            message_box = QMessageBox()
+            message_box.setText('no currents to save')
+            message_box.exec()
+        else:
+            self.experiment.save_data()
 
     def update_start_button(self):
         if self.experiment.scan_running:
@@ -68,6 +75,7 @@ class ScanWindow(QMainWindow):
 
     def stop_pressed(self):
         self.experiment.stop_scan = True
+
 
 if __name__ == "__main__":
     app = QApplication([])

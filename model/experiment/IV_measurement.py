@@ -1,3 +1,4 @@
+from datetime import datetime
 import os
 import time
 import numpy as np
@@ -56,16 +57,21 @@ class IVExperiment:
         if not hasattr(self, 'currents'):
             print('Still no currents acquired')
             return
-        
+
         if not isinstance(filename, str):
-            if not os.path.isdir(self.params['Saving']['path']):
-                os.makedirs(self.params['Saving']['path'])
+
+            folder_name = "{:%Y-%m-%d}".format(datetime.now())
+            final_folder = os.path.join(self.params['Saving']['path'], folder_name)
+
+            if not os.path.isdir(final_folder):
+                os.makedirs(final_folder)
+
             fname = self.params['Saving']['filename']
             i = 0
-            while os.path.exists(os.path.join(self.params['Saving']['path'], fname)):
+            while os.path.exists(os.path.join(final_folder, fname)):
                 fname = self.params['Saving']['filename'] + str(i)
                 i = i+1
-            filename = os.path.join(self.params['Saving']['path'],fname)
+            filename = os.path.join(final_folder, fname)
 
         np.savetxt(filename, self.currents)
 
