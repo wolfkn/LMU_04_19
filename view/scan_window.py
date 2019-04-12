@@ -37,6 +37,9 @@ class ScanWindow(QMainWindow):
         layout = self.centralwidget.layout()
         layout.addWidget(self.plot_widget)
 
+        self.action_Save.triggered.connect(self.experiment.save_data)
+
+
     def update_start_button(self):
         if self.experiment.scan_running:
             self.start_button.setEnabled(False)
