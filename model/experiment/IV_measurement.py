@@ -53,6 +53,8 @@ class IVExperiment:
         pass
 
     def save_data(self, filename=None):
+
+
         if not isinstance(filename, str):
             if not os.path.isdir(self.params['Saving']['path']):
                 os.makedirs(self.params['Saving']['path'])
